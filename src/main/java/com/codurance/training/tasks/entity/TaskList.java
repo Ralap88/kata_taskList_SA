@@ -1,18 +1,19 @@
-package com.codurance.training.tasks;
+package com.codurance.training.tasks.entity;
+
+import com.codurance.training.tasks.Task;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
-    private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
+    private final Tasks tasks = new Tasks();
     private final BufferedReader in;
     private final PrintWriter out;
 
