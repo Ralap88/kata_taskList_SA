@@ -4,7 +4,7 @@ import com.codurance.training.tasks.Task;
 
 import java.util.*;
 
-public class Tasks {
+public class ProjectsList {
     private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
 
     public Set<Map.Entry<String, List<Task>>> entrySet() {
