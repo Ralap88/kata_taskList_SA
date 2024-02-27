@@ -1,7 +1,5 @@
 package com.codurance.training.tasks.entity;
 
-import com.codurance.training.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,5 +18,19 @@ public class Project {
 
     public List<Task> getTasks() {
         return tasks;
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    public boolean containTask(TaskId idString) {
+        return tasks.stream().anyMatch(t -> t.getId().equals(idString));
+    }
+
+    public void setTaskDone(TaskId id, boolean done) {
+        tasks.stream().filter(t -> t.getId().equals(id))
+                .findFirst()
+                .ifPresent(t -> t.setDone(done));
     }
 }

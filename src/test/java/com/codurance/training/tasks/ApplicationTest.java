@@ -7,7 +7,6 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 
-import com.codurance.training.tasks.entity.TaskList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

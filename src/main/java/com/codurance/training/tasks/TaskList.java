@@ -1,6 +1,7 @@
-package com.codurance.training.tasks.entity;
+package com.codurance.training.tasks;
 
-import com.codurance.training.tasks.Task;
+
+import com.codurance.training.tasks.entity.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,15 +10,14 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
-    private final ProjectsList projectsList = new ProjectsList();
+    private final ProjectList projectsList = new ProjectList();
     private final BufferedReader in;
     private final PrintWriter out;
-
-    private long lastId = 0;
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -58,10 +58,10 @@ public final class TaskList implements Runnable {
                 add(commandRest[1]);
                 break;
             case "check":
-                check(commandRest[1]);
+                check(TaskId.of(commandRest[1]));
                 break;
             case "uncheck":
-                uncheck(commandRest[1]);
+                uncheck(TaskId.of(commandRest[1]));
                 break;
             case "help":
                 help();
@@ -73,7 +73,7 @@ public final class TaskList implements Runnable {
     }
 
     private void show() {
-        for (Map.Entry<String, List<Task>> project : projectsList.entrySet()) {
+        for (Map.Entry<ProjectName, List<Task>> project : projectsList.entrySet()) {
             out.println(project.getKey());
             for (Task task : project.getValue()) {
                 out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
@@ -94,39 +94,34 @@ public final class TaskList implements Runnable {
     }
 
     private void addProject(String name) {
-        projectsList.put(name, new ArrayList<Task>());
+        projectsList.put(ProjectName.of(name), new ArrayList<Task>());
     }
 
-    private void addTask(String project, String description) {
-        List<Task> projectTasks = projectsList.get(project);
-        if (projectTasks == null) {
+    private void addTask(String projectName, String description) {
+        Optional<Project> project = projectsList.getProject(ProjectName.of(projectName));
+        if(project.isEmpty()) {
             out.printf("Could not find a project with the name \"%s\".", project);
             out.println();
             return;
         }
-        projectTasks.add(new Task(nextId(), description, false));
+        projectsList.addTask(projectName, description, false);
     }
 
-    private void check(String idString) {
+    private void check(TaskId idString) {
         setDone(idString, true);
     }
 
-    private void uncheck(String idString) {
+    private void uncheck(TaskId idString) {
         setDone(idString, false);
     }
 
-    private void setDone(String idString, boolean done) {
-        int id = Integer.parseInt(idString);
-        for (Map.Entry<String, List<Task>> project : projectsList.entrySet()) {
-            for (Task task : project.getValue()) {
-                if (task.getId() == id) {
-                    task.setDone(done);
-                    return;
-                }
-            }
+    private void setDone(TaskId idString, boolean done) {
+        if(!projectsList.containTask(idString)) {
+            out.printf("Could not find a task with an ID of %s.", idString);
+            out.println();
+            return;
         }
-        out.printf("Could not find a task with an ID of %d.", id);
-        out.println();
+        projectsList.setDone(idString, done);
     }
 
     private void help() {
@@ -142,9 +137,5 @@ public final class TaskList implements Runnable {
     private void error(String command) {
         out.printf("I don't know what the command \"%s\" is.", command);
         out.println();
-    }
-
-    private long nextId() {
-        return ++lastId;
     }
 }
