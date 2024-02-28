@@ -5,7 +5,12 @@ import java.util.*;
 public class ProjectList {
 
     private final List<Project> projects = new ArrayList<>();
+    private final ProjectId id;
     private long lastId = 0;
+
+    public ProjectList(ProjectId id) {
+        this.id = id;
+    }
 
     public void put(ProjectName projectName, ArrayList<Task> tasks) {
         this.projects.add(new Project(projectName, tasks));
@@ -35,5 +40,9 @@ public class ProjectList {
         projects.stream().filter(p -> p.containTask(idString))
                 .findFirst()
                 .ifPresent(p -> p.setTaskDone(idString, done));
+    }
+
+    public ProjectId getId() {
+        return id;
     }
 }
