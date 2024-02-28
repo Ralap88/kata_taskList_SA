@@ -1,19 +1,18 @@
 package com.codurance.training.tasks.entity;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ProjectList {
 
     private final List<Project> projects = new ArrayList<>();
     private long lastId = 0;
 
-    public Set<Map.Entry<ProjectName, List<Task>>> entrySet() {
-        return projects.stream().map(x -> new AbstractMap.SimpleEntry<>(x.getName(), x.getTasks())).collect(Collectors.toSet());
-    }
-
     public void put(ProjectName projectName, ArrayList<Task> tasks) {
         this.projects.add(new Project(projectName, tasks));
+    }
+
+    public List<Project> getProjects() {
+        return projects;
     }
 
     public Optional<Project> getProject(ProjectName projectName) {
@@ -21,7 +20,7 @@ public class ProjectList {
     }
 
     public void addTask(String projectName, String description, boolean done) {
-        this.getProject(ProjectName.of(projectName)).get().addTask(new Task(TaskId.of(nextId()), description, false));
+        this.getProject(ProjectName.of(projectName)).get().addTask(new Task(TaskId.of(nextId()), description, done));
     }
 
     private long nextId() {
