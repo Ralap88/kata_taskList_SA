@@ -2,7 +2,7 @@ package com.codurance.training.tasks;
 
 
 import com.codurance.training.tasks.entity.*;
-import com.codurance.training.tasks.usecase.Execute;
+import com.codurance.training.tasks.adpater.TaskListController;
 import com.codurance.training.tasks.adpater.InMemoryToDoListRepository;
 
 import java.io.BufferedReader;
@@ -47,7 +47,7 @@ public final class TaskList implements Runnable {
             if (command.equals(QUIT)) {
                 break;
             }
-            new Execute(projectsList, out, repository).execute(command);
+            new TaskListController(projectsList, out, repository).execute(command);
         }
     }
 }

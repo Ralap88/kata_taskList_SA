@@ -1,7 +1,31 @@
 package com.codurance.training.tasks.usecase.port;
 
 public class CheckInput {
-    public String id;
-    public String projecetId;
-    public boolean done;
+    private String id;
+    private String projecetId;
+    private boolean done;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getProjecetId() {
+        return projecetId;
+    }
+
+    public void setProjecetId(String projecetId) {
+        this.projecetId = projecetId;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
 }
