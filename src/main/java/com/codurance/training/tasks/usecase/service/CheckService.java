@@ -20,7 +20,7 @@ public class CheckService implements CheckUseCase {
 
     @Override
     public CqrsOutput execute(CheckInput input) {
-        return setDone(ProjectId.of(input.projecetId), TaskId.of(input.id), input.done);
+        return setDone(ProjectId.of(input.getProjecetId()), TaskId.of(input.getId()), input.isDone());
     }
 
     private CqrsOutput setDone(ProjectId projectId, TaskId idString, boolean done) {

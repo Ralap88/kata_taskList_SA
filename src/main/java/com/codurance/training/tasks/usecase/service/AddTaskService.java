@@ -17,16 +17,16 @@ public class AddTaskService implements AddTaskUseCase {
 
     @Override
     public CqrsOutput execute(AddTaskInput input) {
-        ProjectList projectList = repository.findById(ProjectId.of(input.id)).get();
+        ProjectList projectList = repository.findById(ProjectId.of(input.getId())).get();
 
-        if(projectList.getProject(ProjectName.of(input.projectName)).isEmpty()) {
+        if(projectList.getProject(ProjectName.of(input.getProjectName())).isEmpty()) {
             StringBuilder sb = new StringBuilder();
-            sb.append(format("Could not find a project with the name \"%s\".", ProjectName.of(input.projectName)));
+            sb.append(format("Could not find a project with the name \"%s\".", ProjectName.of(input.getProjectName())));
             sb.append("\n");
             return CqrsOutput.create().setExitCode(ExitCode.FAILURE).setMessage(sb.toString());
         }
 
-        projectList.addTask(input.projectName, input.description, false);
+        projectList.addTask(input.getProjectName(), input.getDescription(), false);
         repository.save(projectList);
 
         return CqrsOutput.create().setExitCode(ExitCode.SUCCESS).setMessage("");
