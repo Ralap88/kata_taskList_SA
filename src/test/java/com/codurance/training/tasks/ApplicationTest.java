@@ -7,10 +7,21 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 
+import com.codurance.training.tasks.adpater.InMemoryToDoListRepository;
+import com.codurance.training.tasks.entity.ProjectId;
+import com.codurance.training.tasks.entity.ProjectList;
+import com.codurance.training.tasks.usecase.port.CheckUseCase;
+import com.codurance.training.tasks.usecase.port.ErrorUseCase;
+import com.codurance.training.tasks.usecase.port.HelpUseCase;
+import com.codurance.training.tasks.usecase.port.ShowUseCase;
+import com.codurance.training.tasks.usecase.port.project.AddProjectUseCase;
+import com.codurance.training.tasks.usecase.port.task.AddTaskUseCase;
+import com.codurance.training.tasks.usecase.service.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.codurance.training.tasks.TaskList.DEFAULT_TASK_LIST_ID;
 import static java.lang.System.lineSeparator;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -28,7 +39,20 @@ public final class ApplicationTest {
     public ApplicationTest() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
-        TaskList taskList = new TaskList(in, out);
+
+        InMemoryToDoListRepository repository = new InMemoryToDoListRepository();
+        if (repository.findById(ProjectId.of(DEFAULT_TASK_LIST_ID)).isEmpty()) {
+            repository.save(new ProjectList(ProjectId.of(DEFAULT_TASK_LIST_ID)));
+        }
+
+        ShowUseCase showUseCase = new ShowService(repository);
+        AddProjectUseCase addProjectUseCase = new AddProjectService(repository);
+        AddTaskUseCase addTaskUseCase = new AddTaskService(repository);
+        CheckUseCase checkUseCase = new CheckService(repository);
+        HelpUseCase helpUseCase = new HelpService();
+        ErrorUseCase errorUseCase = new ErrorService();
+
+        TaskList taskList = new TaskList(in, out, showUseCase, addProjectUseCase, addTaskUseCase, checkUseCase, helpUseCase, errorUseCase);
         applicationThread = new Thread(taskList);
     }
 

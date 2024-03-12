@@ -1,15 +1,13 @@
 package com.codurance.training.tasks.usecase.port;
 
-import com.codurance.training.tasks.entity.ProjectList;
-
 public class ShowInput {
-    private ProjectList projectList;
+    private String projectId;
 
-    public ProjectList getProjectList() {
-        return projectList;
+    public String getProjectId() {
+        return projectId;
     }
 
-    public void setProjectList(ProjectList projectList) {
-        this.projectList = projectList;
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 }
