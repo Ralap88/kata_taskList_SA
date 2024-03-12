@@ -4,9 +4,9 @@ import com.codurance.training.tasks.entity.ProjectId;
 import com.codurance.training.tasks.entity.ProjectList;
 import com.codurance.training.tasks.entity.ProjectName;
 import com.codurance.training.tasks.entity.Task;
-import com.codurance.training.tasks.usecase.port.project.AddProjectInput;
-import com.codurance.training.tasks.usecase.port.project.AddProjectUseCase;
-import com.codurance.training.tasks.usecase.port.ProjectListRepository;
+import com.codurance.training.tasks.usecase.port.in.project.AddProjectInput;
+import com.codurance.training.tasks.usecase.port.in.project.AddProjectUseCase;
+import com.codurance.training.tasks.usecase.port.in.ProjectListRepository;
 import tw.teddysoft.ezddd.core.usecase.ExitCode;
 import tw.teddysoft.ezddd.cqrs.usecase.CqrsOutput;
 

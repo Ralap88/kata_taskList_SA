@@ -4,11 +4,12 @@ import java.util.*;
 
 public class ProjectList {
 
-    private final List<Project> projects = new ArrayList<>();
+    private final List<Project> projects;
     private final ProjectId id;
     private long lastId = 0;
 
     public ProjectList(ProjectId id) {
+        projects = new ArrayList<>();
         this.id = id;
     }
 

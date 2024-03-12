@@ -4,12 +4,12 @@ package com.codurance.training.tasks;
 import com.codurance.training.tasks.entity.*;
 import com.codurance.training.tasks.adpater.TaskListController;
 import com.codurance.training.tasks.adpater.InMemoryToDoListRepository;
-import com.codurance.training.tasks.usecase.port.CheckUseCase;
-import com.codurance.training.tasks.usecase.port.ErrorUseCase;
-import com.codurance.training.tasks.usecase.port.HelpUseCase;
-import com.codurance.training.tasks.usecase.port.ShowUseCase;
-import com.codurance.training.tasks.usecase.port.project.AddProjectUseCase;
-import com.codurance.training.tasks.usecase.port.task.AddTaskUseCase;
+import com.codurance.training.tasks.usecase.port.in.CheckUseCase;
+import com.codurance.training.tasks.usecase.port.in.ErrorUseCase;
+import com.codurance.training.tasks.usecase.port.in.HelpUseCase;
+import com.codurance.training.tasks.usecase.port.in.ShowUseCase;
+import com.codurance.training.tasks.usecase.port.in.project.AddProjectUseCase;
+import com.codurance.training.tasks.usecase.port.in.task.AddTaskUseCase;
 import com.codurance.training.tasks.usecase.service.*;
 
 import java.io.BufferedReader;

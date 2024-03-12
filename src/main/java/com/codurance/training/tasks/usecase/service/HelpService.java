@@ -1,6 +1,6 @@
 package com.codurance.training.tasks.usecase.service;
 
-import com.codurance.training.tasks.usecase.port.HelpUseCase;
+import com.codurance.training.tasks.usecase.port.in.HelpUseCase;
 import tw.teddysoft.ezddd.core.usecase.ExitCode;
 import tw.teddysoft.ezddd.cqrs.usecase.CqrsOutput;
 

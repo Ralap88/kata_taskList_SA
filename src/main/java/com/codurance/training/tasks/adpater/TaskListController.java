@@ -1,11 +1,11 @@
 package com.codurance.training.tasks.adpater;
 
 import com.codurance.training.tasks.entity.TaskId;
-import com.codurance.training.tasks.usecase.port.*;
-import com.codurance.training.tasks.usecase.port.project.AddProjectInput;
-import com.codurance.training.tasks.usecase.port.project.AddProjectUseCase;
-import com.codurance.training.tasks.usecase.port.task.AddTaskInput;
-import com.codurance.training.tasks.usecase.port.task.AddTaskUseCase;
+import com.codurance.training.tasks.usecase.port.in.*;
+import com.codurance.training.tasks.usecase.port.in.project.AddProjectInput;
+import com.codurance.training.tasks.usecase.port.in.project.AddProjectUseCase;
+import com.codurance.training.tasks.usecase.port.in.task.AddTaskInput;
+import com.codurance.training.tasks.usecase.port.in.task.AddTaskUseCase;
 
 import java.io.PrintWriter;
 

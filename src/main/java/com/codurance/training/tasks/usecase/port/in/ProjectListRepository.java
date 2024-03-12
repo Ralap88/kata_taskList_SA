@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.usecase.port;
+package com.codurance.training.tasks.usecase.port.in;
 
 import com.codurance.training.tasks.entity.ProjectId;
 import com.codurance.training.tasks.entity.ProjectList;

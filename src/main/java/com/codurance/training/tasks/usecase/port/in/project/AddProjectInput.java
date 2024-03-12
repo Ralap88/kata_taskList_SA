@@ -1,9 +1,8 @@
-package com.codurance.training.tasks.usecase.port.task;
+package com.codurance.training.tasks.usecase.port.in.project;
 
-public class AddTaskInput {
+public class AddProjectInput {
     private String id;
     private String projectName;
-    private String description;
 
     public String getId() {
         return id;
@@ -20,14 +19,4 @@ public class AddTaskInput {
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
-
-
