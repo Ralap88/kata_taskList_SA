@@ -2,7 +2,7 @@ package com.codurance.training.tasks.adpater;
 
 import com.codurance.training.tasks.entity.ProjectId;
 import com.codurance.training.tasks.entity.ProjectList;
-import com.codurance.training.tasks.usecase.port.ProjectListRepository;
+import com.codurance.training.tasks.usecase.port.in.ProjectListRepository;
 
 import java.util.ArrayList;
 import java.util.List;

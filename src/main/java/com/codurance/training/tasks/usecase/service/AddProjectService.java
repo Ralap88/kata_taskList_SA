@@ -4,9 +4,9 @@ import com.codurance.training.tasks.entity.ProjectId;
 import com.codurance.training.tasks.entity.ProjectList;
 import com.codurance.training.tasks.entity.ProjectName;
 import com.codurance.training.tasks.entity.Task;
-import com.codurance.training.tasks.usecase.port.project.AddProjectInput;
-import com.codurance.training.tasks.usecase.port.project.AddProjectUseCase;
-import com.codurance.training.tasks.usecase.port.ProjectListRepository;
+import com.codurance.training.tasks.usecase.port.in.project.AddProjectInput;
+import com.codurance.training.tasks.usecase.port.in.project.AddProjectUseCase;
+import com.codurance.training.tasks.usecase.port.in.ProjectListRepository;
 import tw.teddysoft.ezddd.core.usecase.ExitCode;
 import tw.teddysoft.ezddd.cqrs.usecase.CqrsOutput;
 
@@ -22,8 +22,8 @@ public class AddProjectService implements AddProjectUseCase {
 
     @Override
     public CqrsOutput execute(AddProjectInput input) {
-        ProjectList projectList = repository.findById(ProjectId.of(input.id)).get();
-        projectList.put(ProjectName.of(input.projectName), new ArrayList<Task>());
+        ProjectList projectList = repository.findById(ProjectId.of(input.getId())).get();
+        projectList.put(ProjectName.of(input.getProjectName()), new ArrayList<Task>());
         repository.save(projectList);
         return CqrsOutput.create().setExitCode(ExitCode.SUCCESS).setMessage("");
     }

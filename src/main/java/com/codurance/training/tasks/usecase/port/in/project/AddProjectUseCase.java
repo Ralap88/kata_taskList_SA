@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.usecase.port.project;
+package com.codurance.training.tasks.usecase.port.in.project;
 
 import tw.teddysoft.ezddd.cqrs.usecase.CqrsOutput;
 

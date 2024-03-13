@@ -3,9 +3,9 @@ package com.codurance.training.tasks.usecase.service;
 import com.codurance.training.tasks.entity.ProjectId;
 import com.codurance.training.tasks.entity.ProjectList;
 import com.codurance.training.tasks.entity.TaskId;
-import com.codurance.training.tasks.usecase.port.CheckInput;
-import com.codurance.training.tasks.usecase.port.CheckUseCase;
-import com.codurance.training.tasks.usecase.port.ProjectListRepository;
+import com.codurance.training.tasks.usecase.port.in.check.CheckInput;
+import com.codurance.training.tasks.usecase.port.in.check.CheckUseCase;
+import com.codurance.training.tasks.usecase.port.in.ProjectListRepository;
 import tw.teddysoft.ezddd.core.usecase.ExitCode;
 import tw.teddysoft.ezddd.cqrs.usecase.CqrsOutput;
 
@@ -20,7 +20,7 @@ public class CheckService implements CheckUseCase {
 
     @Override
     public CqrsOutput execute(CheckInput input) {
-        return setDone(ProjectId.of(input.projecetId), TaskId.of(input.id), input.done);
+        return setDone(ProjectId.of(input.getProjecetId()), TaskId.of(input.getId()), input.isDone());
     }
 
     private CqrsOutput setDone(ProjectId projectId, TaskId idString, boolean done) {
