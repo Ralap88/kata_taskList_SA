@@ -4,11 +4,12 @@ import com.codurance.training.tasks.entity.Project;
 import com.codurance.training.tasks.entity.ProjectId;
 import com.codurance.training.tasks.entity.ProjectList;
 import com.codurance.training.tasks.entity.Task;
+import com.codurance.training.tasks.usecase.port.*;
 import com.codurance.training.tasks.usecase.port.in.ProjectListRepository;
-import com.codurance.training.tasks.usecase.port.in.ShowInput;
-import com.codurance.training.tasks.usecase.port.in.ShowUseCase;
+import com.codurance.training.tasks.usecase.port.in.show.ShowInput;
+import com.codurance.training.tasks.usecase.port.in.show.ShowOutput;
+import com.codurance.training.tasks.usecase.port.in.show.ShowUseCase;
 import tw.teddysoft.ezddd.core.usecase.ExitCode;
-import tw.teddysoft.ezddd.cqrs.usecase.CqrsOutput;
 
 import static java.lang.String.format;
 
@@ -20,11 +21,11 @@ public class ShowService implements ShowUseCase {
         this.repository = repository;
     }
     @Override
-    public CqrsOutput execute(ShowInput input) {
+    public ShowOutput execute(ShowInput input) {
         return show(input);
     }
 
-    public CqrsOutput show(ShowInput input) {
+    public ShowOutput show(ShowInput input) {
         ProjectList projectList = repository.findById(ProjectId.of(input.getProjectId())).get();
         StringBuilder sb = new StringBuilder();
         for (Project project : projectList.getProjects()) {
@@ -34,6 +35,6 @@ public class ShowService implements ShowUseCase {
             }
             sb.append(System.lineSeparator());
         }
-        return CqrsOutput.create().setExitCode(ExitCode.SUCCESS).setMessage(sb.toString());
+        return ShowOutput.create(ShowOutput.class).setExitCode(ExitCode.SUCCESS).SetProjects(projectList.getProjects().stream().map(ProjectMapper::toDto).toList());
     }
 }

@@ -9,6 +9,6 @@ public class ProjectMapper {
     }
 
     public Project toDomain(ProjectDto projectDto) {
-        return new Project(ProjectName.of(projectDto.getName()), projectDto.getTasks().stream().map(TaskMapper::toDomain).toList());
+        return new Project(ProjectName.of(projectDto.getName()), projectDto.getTaskDtos().stream().map(TaskMapper::toDomain).toList());
     }
 }

@@ -1,9 +1,17 @@
 package com.codurance.training.tasks.adpater;
 
+import com.codurance.training.tasks.adpater.presenter.HelpPresenter;
+import com.codurance.training.tasks.adpater.presenter.ShowPresenter;
 import com.codurance.training.tasks.entity.TaskId;
-import com.codurance.training.tasks.usecase.port.in.*;
+import com.codurance.training.tasks.usecase.port.in.check.CheckInput;
+import com.codurance.training.tasks.usecase.port.in.check.CheckUseCase;
+import com.codurance.training.tasks.usecase.port.in.error.ErrorInPut;
+import com.codurance.training.tasks.usecase.port.in.error.ErrorUseCase;
+import com.codurance.training.tasks.usecase.port.in.help.HelpUseCase;
 import com.codurance.training.tasks.usecase.port.in.project.AddProjectInput;
 import com.codurance.training.tasks.usecase.port.in.project.AddProjectUseCase;
+import com.codurance.training.tasks.usecase.port.in.show.ShowInput;
+import com.codurance.training.tasks.usecase.port.in.show.ShowUseCase;
 import com.codurance.training.tasks.usecase.port.in.task.AddTaskInput;
 import com.codurance.training.tasks.usecase.port.in.task.AddTaskUseCase;
 
@@ -43,7 +51,8 @@ public class TaskListController {
             case "show":
                 ShowInput showInput = new ShowInput();
                 showInput.setProjectId(DEFAULT_TASK_LIST_ID);
-                out.printf(showUseCase.execute(showInput).getMessage());
+                var showOutput = showUseCase.execute(showInput);
+                ShowPresenter.present(out, showOutput.getProjects());
                 break;
             case "add":
                 add(commandRest[1]);
@@ -55,7 +64,8 @@ public class TaskListController {
                 check(TaskId.of(commandRest[1]), false);
                 break;
             case "help":
-                out.printf(helpUseCase.execute().getMessage());
+                var helpOutPut = helpUseCase.execute();
+                HelpPresenter.present(out, helpOutPut.getResult());
                 break;
             default:
                 ErrorInPut errorInPut = new ErrorInPut();

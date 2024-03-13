@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.usecase.port.in;
+package com.codurance.training.tasks.usecase.port.in.show;
 
 public class ShowInput {
     private String projectId;

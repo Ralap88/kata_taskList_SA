@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.usecase.port.in;
+package com.codurance.training.tasks.usecase.port.in.check;
 
 public class CheckInput {
     private String id;

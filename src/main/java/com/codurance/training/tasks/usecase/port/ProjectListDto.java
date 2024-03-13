@@ -1,6 +1,7 @@
 package com.codurance.training.tasks.usecase.port;
 
 import com.codurance.training.tasks.entity.ProjectId;
+import com.codurance.training.tasks.entity.TaskId;
 
 import java.util.List;
 
@@ -19,5 +20,13 @@ public class ProjectListDto {
 
     public ProjectId getId() {
         return id;
+    }
+
+    public List<ProjectDto> getProjects() {
+        return projectDtos;
+    }
+
+    public boolean containTask(TaskId idString) {
+        return projectDtos.stream().anyMatch(p -> p.containTask(idString));
     }
 }

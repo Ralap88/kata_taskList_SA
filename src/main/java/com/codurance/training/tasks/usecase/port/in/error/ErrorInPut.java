@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.usecase.port.in;
+package com.codurance.training.tasks.usecase.port.in.error;
 
 public class ErrorInPut {
     private String command;
