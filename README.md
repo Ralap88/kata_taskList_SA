@@ -1,3 +1,11 @@
+# HW2
+1. Replaced Show with ShowUseCase, ShowInput and ShowService. 
+2. Added getter and setter for inputs.
+3. Added DTOs to prevent the outer layer from using entity objects directly.
+4. Added presenters and outputs for presentation logic. 
+5. Moved use cases, inputs and outputs to port.in package.
+
+
 # Task List &nbsp; [![Build Status](https://travis-ci.org/codurance/task-list.png)](https://travis-ci.org/codurance/task-list)
 
 This is an example of code obsessed with primitives.
