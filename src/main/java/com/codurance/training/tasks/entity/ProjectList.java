@@ -34,6 +34,10 @@ public class ProjectList extends AggregateRoot<ProjectId, DomainEvent> {
         this.getProject(ProjectName.of(projectName)).get().addTask(new Task(TaskId.of(nextId()), description, done));
     }
 
+    public void addProject(Project project) {
+        projects.add(project);
+    }
+
     private long nextId() {
         return ++lastId;
     }

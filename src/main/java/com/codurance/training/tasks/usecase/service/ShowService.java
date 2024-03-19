@@ -17,10 +17,6 @@ public class ShowService implements ShowUseCase {
     }
     @Override
     public ShowOutput execute(ShowInput input) {
-        return show(input);
-    }
-
-    public ShowOutput show(ShowInput input) {
         ProjectList projectList = repository.findById(ProjectId.of(input.getProjectId())).get();
 
         return ShowOutput

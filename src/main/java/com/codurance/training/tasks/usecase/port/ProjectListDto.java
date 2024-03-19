@@ -8,9 +8,9 @@ import java.util.List;
 
 public class ProjectListDto implements StoreData {
     private final List<ProjectDto> projectDtos;
-    private final ProjectId id;
+    private final String id;
 
-    public ProjectListDto(List<ProjectDto> projectDtos, ProjectId id) {
+    public ProjectListDto(List<ProjectDto> projectDtos, String id) {
         this.projectDtos = projectDtos;
         this.id = id;
     }
@@ -30,7 +30,7 @@ public class ProjectListDto implements StoreData {
     }
 
     public String getId() {
-        return id.value();
+        return id;
     }
 
     @Override

@@ -20,6 +20,6 @@ public class AddProjectService implements AddProjectUseCase {
         ProjectList projectList = repository.findById(ProjectId.of(input.getId())).get();
         projectList.add(Project.of(ProjectName.of(input.getProjectName())));
         repository.save(projectList);
-        return CqrsOutput.create().setExitCode(ExitCode.SUCCESS).setMessage("");
+        return CqrsOutput.create().setExitCode(ExitCode.SUCCESS);
     }
 }

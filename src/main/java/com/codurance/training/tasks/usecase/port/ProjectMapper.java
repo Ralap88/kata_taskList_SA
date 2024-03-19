@@ -11,7 +11,7 @@ public class ProjectMapper {
         return new ProjectDto(project.getName().value(), project.getTasks().stream().map(TaskMapper::toDto).toList());
     }
 
-    public Project toDomain(ProjectDto projectDto) {
+    public static Project toDomain(ProjectDto projectDto) {
         List<Task> tasks = projectDto.getTaskDtos().stream().map(TaskMapper::toDomain).toList();
         Project project = new Project(ProjectName.of(projectDto.getName()));
         for (Task task: tasks) {
