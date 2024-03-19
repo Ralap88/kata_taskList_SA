@@ -2,6 +2,9 @@ package com.codurance.training.tasks.usecase.port;
 
 import com.codurance.training.tasks.entity.Project;
 import com.codurance.training.tasks.entity.ProjectName;
+import com.codurance.training.tasks.entity.Task;
+
+import java.util.List;
 
 public class ProjectMapper {
     public static ProjectDto toDto(Project project) {
@@ -9,6 +12,11 @@ public class ProjectMapper {
     }
 
     public Project toDomain(ProjectDto projectDto) {
-        return new Project(ProjectName.of(projectDto.getName()), projectDto.getTaskDtos().stream().map(TaskMapper::toDomain).toList());
+        List<Task> tasks = projectDto.getTaskDtos().stream().map(TaskMapper::toDomain).toList();
+        Project project = new Project(ProjectName.of(projectDto.getName()));
+        for (Task task: tasks) {
+            project.addTask(task);
+        }
+        return project;
     }
 }

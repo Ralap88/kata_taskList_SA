@@ -1,11 +1,12 @@
 package com.codurance.training.tasks.usecase.port;
 
 import com.codurance.training.tasks.entity.ProjectId;
-import com.codurance.training.tasks.entity.TaskId;
+import tw.teddysoft.ezddd.core.usecase.StoreData;
+import tw.teddysoft.ezddd.core.usecase.domainevent.DomainEventData;
 
 import java.util.List;
 
-public class ProjectListDto {
+public class ProjectListDto implements StoreData {
     private final List<ProjectDto> projectDtos;
     private final ProjectId id;
 
@@ -18,15 +19,42 @@ public class ProjectListDto {
         return projectDtos;
     }
 
-    public ProjectId getId() {
-        return id;
+    @Override
+    public long getVersion() {
+        return 0;
     }
 
-    public List<ProjectDto> getProjects() {
-        return projectDtos;
+    @Override
+    public void setVersion(long version) {
+
     }
 
-    public boolean containTask(TaskId idString) {
-        return projectDtos.stream().anyMatch(p -> p.containTask(idString));
+    public String getId() {
+        return id.value();
+    }
+
+    @Override
+    public void setId(String id) {
+
+    }
+
+    @Override
+    public List<DomainEventData> getDomainEventDatas() {
+        return null;
+    }
+
+    @Override
+    public void setDomainEventDatas(List<DomainEventData> domainEventDatas) {
+
+    }
+
+    @Override
+    public String getStreamName() {
+        return null;
+    }
+
+    @Override
+    public void setStreamName(String streamName) {
+
     }
 }

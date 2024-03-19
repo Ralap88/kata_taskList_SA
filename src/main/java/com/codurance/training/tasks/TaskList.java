@@ -1,15 +1,18 @@
 package com.codurance.training.tasks;
 
 
+import com.codurance.training.tasks.adpater.repository.InMemoryRepositoryPeer;
 import com.codurance.training.tasks.entity.*;
 import com.codurance.training.tasks.adpater.TaskListController;
-import com.codurance.training.tasks.adpater.InMemoryToDoListRepository;
+import com.codurance.training.tasks.adpater.repository.InMemoryToDoListRepository;
 import com.codurance.training.tasks.usecase.port.in.check.CheckUseCase;
 import com.codurance.training.tasks.usecase.port.in.error.ErrorUseCase;
 import com.codurance.training.tasks.usecase.port.in.help.HelpUseCase;
 import com.codurance.training.tasks.usecase.port.in.show.ShowUseCase;
 import com.codurance.training.tasks.usecase.port.in.project.AddProjectUseCase;
 import com.codurance.training.tasks.usecase.port.in.task.AddTaskUseCase;
+import com.codurance.training.tasks.usecase.port.out.TaskListRepository;
+import com.codurance.training.tasks.usecase.port.out.TaskListRepositoryPeer;
 import com.codurance.training.tasks.usecase.service.*;
 
 import java.io.BufferedReader;
@@ -32,7 +35,10 @@ public final class TaskList implements Runnable {
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
-        InMemoryToDoListRepository repository = new InMemoryToDoListRepository();
+
+        TaskListRepositoryPeer taskListRepositoryPeer = new InMemoryRepositoryPeer();
+        TaskListRepository repository = new InMemoryToDoListRepository(taskListRepositoryPeer);
+
         if (repository.findById(ProjectId.of(DEFAULT_TASK_LIST_ID)).isEmpty()) {
             repository.save(new ProjectList(ProjectId.of(DEFAULT_TASK_LIST_ID)));
         }

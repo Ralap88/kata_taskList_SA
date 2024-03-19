@@ -1,8 +1,13 @@
 package com.codurance.training.tasks.entity;
 
-import java.util.*;
+import tw.teddysoft.ezddd.core.entity.AggregateRoot;
+import tw.teddysoft.ezddd.core.entity.DomainEvent;
 
-public class ProjectList {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class ProjectList extends AggregateRoot<ProjectId, DomainEvent> {
 
     private final List<Project> projects;
     private final ProjectId id;
@@ -13,8 +18,8 @@ public class ProjectList {
         this.id = id;
     }
 
-    public void put(ProjectName projectName, ArrayList<Task> tasks) {
-        this.projects.add(new Project(projectName, tasks));
+    public void add(Project project) {
+        projects.add(project);
     }
 
     public List<Project> getProjects() {
