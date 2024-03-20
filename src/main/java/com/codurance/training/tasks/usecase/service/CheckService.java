@@ -5,16 +5,16 @@ import com.codurance.training.tasks.entity.ProjectList;
 import com.codurance.training.tasks.entity.TaskId;
 import com.codurance.training.tasks.usecase.port.in.check.CheckInput;
 import com.codurance.training.tasks.usecase.port.in.check.CheckUseCase;
-import com.codurance.training.tasks.usecase.port.in.ProjectListRepository;
+import com.codurance.training.tasks.usecase.port.out.TaskListRepository;
 import tw.teddysoft.ezddd.core.usecase.ExitCode;
 import tw.teddysoft.ezddd.cqrs.usecase.CqrsOutput;
 
 import static java.lang.String.format;
 
 public class CheckService implements CheckUseCase {
-    private final ProjectListRepository repository;
+    private final TaskListRepository repository;
 
-    public CheckService(ProjectListRepository repository) {
+    public CheckService(TaskListRepository repository) {
         this.repository = repository;
     }
 

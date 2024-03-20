@@ -7,7 +7,8 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 
-import com.codurance.training.tasks.adpater.InMemoryToDoListRepository;
+import com.codurance.training.tasks.adpater.repository.InMemoryTaskListRepositoryPeer;
+import com.codurance.training.tasks.adpater.repository.InMemoryTaskListRepository;
 import com.codurance.training.tasks.entity.ProjectId;
 import com.codurance.training.tasks.entity.ProjectList;
 import com.codurance.training.tasks.usecase.port.in.check.CheckUseCase;
@@ -16,6 +17,8 @@ import com.codurance.training.tasks.usecase.port.in.help.HelpUseCase;
 import com.codurance.training.tasks.usecase.port.in.show.ShowUseCase;
 import com.codurance.training.tasks.usecase.port.in.project.AddProjectUseCase;
 import com.codurance.training.tasks.usecase.port.in.task.AddTaskUseCase;
+import com.codurance.training.tasks.usecase.port.out.TaskListRepository;
+import com.codurance.training.tasks.usecase.port.out.TaskListRepositoryPeer;
 import com.codurance.training.tasks.usecase.service.*;
 import org.junit.After;
 import org.junit.Before;
@@ -40,11 +43,17 @@ public final class ApplicationTest {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
 
-        InMemoryToDoListRepository repository = new InMemoryToDoListRepository();
+        TaskListRepositoryPeer taskListRepositoryPeer = new InMemoryTaskListRepositoryPeer();
+        TaskListRepository repository = new InMemoryTaskListRepository(taskListRepositoryPeer);
         if (repository.findById(ProjectId.of(DEFAULT_TASK_LIST_ID)).isEmpty()) {
             repository.save(new ProjectList(ProjectId.of(DEFAULT_TASK_LIST_ID)));
         }
 
+        TaskList taskList = getTaskList(repository, in, out);
+        applicationThread = new Thread(taskList);
+    }
+
+    private TaskList getTaskList(TaskListRepository repository, BufferedReader in, PrintWriter out) {
         ShowUseCase showUseCase = new ShowService(repository);
         AddProjectUseCase addProjectUseCase = new AddProjectService(repository);
         AddTaskUseCase addTaskUseCase = new AddTaskService(repository);
@@ -52,8 +61,7 @@ public final class ApplicationTest {
         HelpUseCase helpUseCase = new HelpService();
         ErrorUseCase errorUseCase = new ErrorService();
 
-        TaskList taskList = new TaskList(in, out, showUseCase, addProjectUseCase, addTaskUseCase, checkUseCase, helpUseCase, errorUseCase);
-        applicationThread = new Thread(taskList);
+        return new TaskList(in, out, showUseCase, addProjectUseCase, addTaskUseCase, checkUseCase, helpUseCase, errorUseCase);
     }
 
     @Before public void

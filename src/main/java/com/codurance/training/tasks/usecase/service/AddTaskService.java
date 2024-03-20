@@ -1,17 +1,19 @@
 package com.codurance.training.tasks.usecase.service;
 
-import com.codurance.training.tasks.entity.*;
+import com.codurance.training.tasks.entity.ProjectId;
+import com.codurance.training.tasks.entity.ProjectList;
+import com.codurance.training.tasks.entity.ProjectName;
 import com.codurance.training.tasks.usecase.port.in.task.AddTaskInput;
 import com.codurance.training.tasks.usecase.port.in.task.AddTaskUseCase;
-import com.codurance.training.tasks.usecase.port.in.ProjectListRepository;
+import com.codurance.training.tasks.usecase.port.out.TaskListRepository;
 import tw.teddysoft.ezddd.core.usecase.ExitCode;
 import tw.teddysoft.ezddd.cqrs.usecase.CqrsOutput;
 
 import static java.lang.String.format;
 
 public class AddTaskService implements AddTaskUseCase {
-    private final ProjectListRepository repository;
-    public AddTaskService(ProjectListRepository repository) {
+    private final TaskListRepository repository;
+    public AddTaskService(TaskListRepository repository) {
         this.repository = repository;
     }
 
