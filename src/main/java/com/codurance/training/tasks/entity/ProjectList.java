@@ -11,7 +11,7 @@ public class ProjectList extends AggregateRoot<ProjectId, DomainEvent> {
 
     private final List<Project> projects;
     private final ProjectId id;
-    private long lastId = 0;
+    private static int lastId = 0;
 
     public ProjectList(ProjectId id) {
         projects = new ArrayList<>();

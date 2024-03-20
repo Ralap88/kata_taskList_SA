@@ -1,6 +1,5 @@
 package com.codurance.training.tasks;
 
-
 import com.codurance.training.tasks.adpater.repository.InMemoryTaskListRepositoryPeer;
 import com.codurance.training.tasks.entity.*;
 import com.codurance.training.tasks.adpater.TaskListController;
@@ -36,8 +35,8 @@ public final class TaskList implements Runnable {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
 
-        TaskListRepositoryPeer inMemoryTaskListRepositoryPeer = new InMemoryTaskListRepositoryPeer();
-        TaskListRepository repository = new InMemoryTaskListRepository(inMemoryTaskListRepositoryPeer);
+        TaskListRepositoryPeer taskListRepositoryPeer = new InMemoryTaskListRepositoryPeer();
+        TaskListRepository repository = new InMemoryTaskListRepository(taskListRepositoryPeer);
 
         if (repository.findById(ProjectId.of(DEFAULT_TASK_LIST_ID)).isEmpty()) {
             repository.save(new ProjectList(ProjectId.of(DEFAULT_TASK_LIST_ID)));
