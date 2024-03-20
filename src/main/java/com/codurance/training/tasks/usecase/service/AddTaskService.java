@@ -19,7 +19,11 @@ public class AddTaskService implements AddTaskUseCase {
 
     @Override
     public CqrsOutput execute(AddTaskInput input) {
-        ProjectList projectList = repository.findById(ProjectId.of(input.getId())).get();
+        ProjectList projectList = repository.findById(ProjectId.of(input.getId())).orElse(null);
+
+        if(projectList == null) {
+            return CqrsOutput.create().setExitCode(ExitCode.FAILURE);
+        }
 
         if(projectList.getProject(ProjectName.of(input.getProjectName())).isEmpty()) {
             StringBuilder sb = new StringBuilder();

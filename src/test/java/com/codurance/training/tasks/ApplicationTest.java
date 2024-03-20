@@ -7,8 +7,8 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 
-import com.codurance.training.tasks.adpater.repository.InMemoryRepositoryPeer;
-import com.codurance.training.tasks.adpater.repository.InMemoryToDoListRepository;
+import com.codurance.training.tasks.adpater.repository.InMemoryTaskListRepositoryPeer;
+import com.codurance.training.tasks.adpater.repository.InMemoryTaskListRepository;
 import com.codurance.training.tasks.entity.ProjectId;
 import com.codurance.training.tasks.entity.ProjectList;
 import com.codurance.training.tasks.usecase.port.in.check.CheckUseCase;
@@ -43,8 +43,8 @@ public final class ApplicationTest {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
 
-        TaskListRepositoryPeer taskListRepositoryPeer = new InMemoryRepositoryPeer();
-        TaskListRepository repository = new InMemoryToDoListRepository(taskListRepositoryPeer);
+        TaskListRepositoryPeer taskListRepositoryPeer = new InMemoryTaskListRepositoryPeer();
+        TaskListRepository repository = new InMemoryTaskListRepository(taskListRepositoryPeer);
         if (repository.findById(ProjectId.of(DEFAULT_TASK_LIST_ID)).isEmpty()) {
             repository.save(new ProjectList(ProjectId.of(DEFAULT_TASK_LIST_ID)));
         }

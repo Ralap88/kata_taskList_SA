@@ -31,7 +31,7 @@ public class ProjectList extends AggregateRoot<ProjectId, DomainEvent> {
     }
 
     public void addTask(String projectName, String description, boolean done) {
-        this.getProject(ProjectName.of(projectName)).get().addTask(new Task(TaskId.of(nextId()), description, done));
+        getProject(ProjectName.of(projectName)).get().addTask(new Task(TaskId.of(nextId()), description, done));
     }
 
     public void addProject(Project project) {
