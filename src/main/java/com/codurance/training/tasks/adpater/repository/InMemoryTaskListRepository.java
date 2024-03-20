@@ -8,10 +8,10 @@ import com.codurance.training.tasks.usecase.port.out.TaskListRepositoryPeer;
 
 import java.util.Optional;
 
-public class InMemoryToDoListRepository implements TaskListRepository {
-    private TaskListRepositoryPeer repositoryPeer;
+public class InMemoryTaskListRepository implements TaskListRepository {
+    private final TaskListRepositoryPeer repositoryPeer;
 
-    public InMemoryToDoListRepository(TaskListRepositoryPeer repositoryPeer) {
+    public InMemoryTaskListRepository(TaskListRepositoryPeer repositoryPeer) {
         this.repositoryPeer = repositoryPeer;
     }
 

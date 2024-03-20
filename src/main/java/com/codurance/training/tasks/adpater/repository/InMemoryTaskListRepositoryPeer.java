@@ -5,10 +5,10 @@ import com.codurance.training.tasks.usecase.port.out.TaskListRepositoryPeer;
 
 import java.util.*;
 
-public class InMemoryRepositoryPeer implements TaskListRepositoryPeer {
+public class InMemoryTaskListRepositoryPeer implements TaskListRepositoryPeer {
     private final Map<String, ProjectListDto> store;
 
-    public InMemoryRepositoryPeer() {
+    public InMemoryTaskListRepositoryPeer() {
         store = new HashMap<>();
     }
 
