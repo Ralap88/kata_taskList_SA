@@ -35,8 +35,8 @@ public final class TaskList implements Runnable {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
 
-        TaskListRepositoryPeer inMemoryTaskListRepositoryPeer = new InMemoryTaskListRepositoryPeer();
-        TaskListRepository repository = new InMemoryTaskListRepository(inMemoryTaskListRepositoryPeer);
+        TaskListRepositoryPeer taskListRepositoryPeer = new InMemoryRepositoryPeer();
+        TaskListRepository repository = new InMemoryToDoListRepository(taskListRepositoryPeer);
 
         if (repository.findById(ProjectId.of(DEFAULT_TASK_LIST_ID)).isEmpty()) {
             repository.save(new ProjectList(ProjectId.of(DEFAULT_TASK_LIST_ID)));
